@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="ISO-8859-1">
+    
+<link rel="stylesheet" 
+ href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+</head>
+<style>
+    .navbar {
+        background-color: cadetblue;
+    }
+    .anchor{
+    margin: 6px;
+    background-color: #d9edf7;
+    border-color: #d9edf7;
+    }
+    
+    input, label {
+    display:block;
+}
+   
+</style>
+
+<body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                            <h1>Oauth2.0</h1>
+                            <div class="container">
+                            <div class="row">
+                            <div class="col-md-3">
+                           <h4> Hi, Welcome <span th:text ="*{userDetails}"></span> </h4></div>      
+                           <div class="col-md-3">
+                           <a th:href="@{/logout}" class="btn anchor" style="margin-left:500px"> <i class="fa fa-arrow-circle-o-left"></i>&nbsp;Logout</a>
+                           </div>
+          </div>      
+           </div> 
+            </div>
+        </div>
+    </nav>
+
+    <br><br><br><br><br><br><br>
+    <!-- Create HTML registration form -->
+    <div class="container">
+        <div class="row">
+			<h2>Welcome to My Channel . Please SUBSCRIBE.</h2>
+        </div>
+    </div>
+    
+</body>
+</html>
