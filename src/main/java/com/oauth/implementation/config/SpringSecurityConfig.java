@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.oauth.implementation.service.DefaultUserService;
 
@@ -44,16 +43,13 @@ public class SpringSecurityConfig {
 	
 	
 	@Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {    
-        http.csrf().disable()
-        .authorizeRequests()
-        .antMatchers("/registration/**","/login/**").permitAll()
-        .anyRequest().authenticated()
-        .and()
-        .formLogin().loginPage("/login").successHandler(successHandler)
-        .and().csrf().disable()
-        .logout().logoutUrl("/logout").logoutSuccessUrl("/login")
-        .and().oauth2Login().loginPage("/login").successHandler(successHandler);
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(requests -> {
+                    requests.requestMatchers("/registration/**", "/login/**").permitAll();
+                    requests.anyRequest().authenticated();})
+                .formLogin(login -> login.loginPage("/login").successHandler(successHandler)).csrf(csrf -> csrf.disable())
+                .logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/login")).oauth2Login(login -> login.loginPage("/login").successHandler(successHandler));
 return http.build();
 
     }
